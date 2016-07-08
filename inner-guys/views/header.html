@@ -1,0 +1,14 @@
+<header ng-controller="headerctrl">
+        <div class="container">
+            <a class="logo" title="logo" ui-sref="home"><img src="img/logo.png" alt="innergize logo"></a>
+            <div class="hamburger pull-right">
+              <button type="button" class="navbar-toggle nav-button {{showBar}}" ng-click="getMenu();">
+                <!-- <span class="sr-only">Toggle navigation</span> -->
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              </div>
+        </div>
+        <nav ng-include="template.menu" class="template menu {{showMenu}}"></nav>
+</header>

@@ -1,0 +1,94 @@
+@media (max-width: $screen-sm-max) {
+  .content-holder {
+    p {
+      width: 100%;
+    }
+  }
+  .download {
+    ul li {
+      .nav-link .pd20 {
+        padding: 10px;
+        font-size: 12px;
+      }
+    }
+    .ul-download {
+      li {
+        width: 50%;
+      }
+    }
+  }
+}
+@media (max-width: $screen-xs-max) {
+  .download {
+    .ul-download {
+      li {
+        width: 100%;
+      }
+    }
+    .pl60 {
+      padding-left: 20px;
+    }
+    .nav-tabs {
+      padding: 0;
+    }
+  }
+  .menu {
+    width: 100%;
+    background-color: rgba(123, 129, 133, 0.90);
+    a {
+      text-align: center;
+    }
+    .list-inline {
+      text-align: center;
+    }
+  }
+  .icon-scroll .circle img {
+    width: 36px;
+  }
+  .philosophy-box h1,
+  .head-font h1 {
+    padding-top: 0;
+    font-size: 36px;
+  }
+  .philosophy-box h2 {
+    font-size: 30px;
+  }
+  .row-flex.display-block-mobile {
+    display: block;
+  }
+  .overview-box {
+    position: static;
+    @include transform(translate(0));
+    width: 100%;
+    padding: 20px;
+    // margin: 20px 0;
+  }
+  .services-list .panel-group .panel-default .panel-heading h4 {
+    font-size: 14px;
+    i {
+      color: #979797;
+      display: none;
+    }
+  }
+  .services-box-white {
+    padding: 20px;
+  }
+  .clients .flex-direction-nav a {
+    transform: scale(0.6);
+  }
+  .pt70 {
+    padding-top: 70px;
+  }
+  .circle img {
+    width: 40px;
+  }
+}
+@media (max-width: 480px) {
+  .dot-blue li:before {
+    margin-right: 8px;
+  }
+  .clients li {
+    width: 49%;
+    margin: 5px 0;
+  }
+}

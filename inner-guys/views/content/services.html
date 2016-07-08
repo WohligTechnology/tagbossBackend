@@ -1,0 +1,42 @@
+<section>
+  <div class="banner services-banners" auto-height>
+    <div class="dark-overlay"></div>
+    <div class="head-font">
+      <h1>Services</h1>
+    </div>
+  </div>
+  <div class="bg-grey pb20">
+    <div class="container">
+      <div class="services-box-white text-justify">
+        <p>
+          Innergize offers a comprehensive range of strategic, advisory and execution services that are customized to the grass root reality of the customer’s business environment to harness sustainable, competence and process driven results. Our functional area
+          experts and affiliates ensure that your business is operating at optimal levels.</p>
+      </div>
+    </div>
+  </div>
+  <div class="bg-grey">
+    <div class="container">
+      <div class="pd-side pb50">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="service">
+              <div class="services-list bg-grey">
+                <uib-accordion close-others="oneAtATime" is-open="status.open">
+                  <uib-accordion-group is-open="status.open1" is-disabled="status.isFirstDisabled" ng-repeat="data in services">
+                    <uib-accordion-heading>
+                      <h4>
+                 <span class="uppercase">{{data.title}}</span>
+                  <i class="pull-right fa" ng-class="{'fa-minus': status.open1, 'fa-plus': !status.open1}"></i>
+                </h4>
+                    </uib-accordion-heading>
+                    <div class="text-justify" ng-bind-html="data.content"></div>
+                  </uib-accordion-group>
+                </uib-accordion>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

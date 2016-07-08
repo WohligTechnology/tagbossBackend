@@ -1,0 +1,13 @@
+bower_components/
+node_modules/
+w/
+.sass-cache/
+*.tar
+production/
+*.zip
+css/
+img2/
+
+Innergize-home-sidemenu-closed.jpg
+
+Innergize-home-sidemenu-opened.jpg

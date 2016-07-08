@@ -1,0 +1,102 @@
+<section scrolldown>
+  <div class="banner carrers-banners" auto-height>
+    <div class="head-font">
+      <h1>Careers</h1>
+    </div>
+    <div class="bounce pos-btm" ng-click="scrollDown();">
+      <span class="circle">
+        <!-- <i class="fa fa-chevron-down" aria-hidden="true"></i> -->
+        <img src="img/down-arrow.png" alt="scroll down" title="scroll down">
+      </span>
+    </div>
+  </div>
+  <div class="container pt50 pb50">
+    <div class="cont-careers text-justify">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <p>Clichéd as it may sound; the energizing element at Innergize is its people. Here a team of individuals from diverse backgrounds and varied interests work towards a common professional goal.</p>
+          <p>
+            At Innergize, we believe that the smile of satisfaction of a good day's work done is the first step in the ladder to career growth. If you would like to be part of this highly Innergizing Team, you may send your resume by filling the adjacent form.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bck-colors philosophy-box uppercase second">
+    <div class="container pt50 pt70 pb50">
+      <div class="" ng-hide="thankyouact">
+        <div class="text-center pt30">
+          <h2 class="font-weight400 font-didot color-white">Application Form</h2>
+        </div>
+        <div class="row pt30 appfrom">
+          <div class="col-md-offset-2 col-md-8">
+            <form action="" name="careerForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group getintouch">
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name*" name="name" ng-model="formData.name" required>
+                    <div class="error-msg" ng-show="careerForm.name.$error.required && careerForm.name.$touched">Please Enter Your Name.</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group getintouch">
+                    <input type="text" class="form-control" id="exampleInputEmail1" ng-model="formData.department" placeholder="Department">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group getintouch">
+                    <input type="email" class="form-control" id="exampleInputEmail1" ng-model="formData.email" placeholder="Email*" name="email" ng-model="formData.email" required>
+                    <div class="error-msg" ng-show="careerForm.email.$error.required && careerForm.email.$touched">Please Enter Your Email.</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group getintouch">
+                    <input type="tel" class="form-control" id="exampleInputEmail1" ng-model="formData.phone" placeholder="Phone" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group getintouch">
+                    <input type="text" class="form-control" id="exampleInputEmail1" ng-model="formData.position" placeholder="Position">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group getintouch">
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Qualification" ng-model="formData.qualification">
+                  </div>
+                </div>
+              </div>
+              <div class="row pb30">
+                <div class="col-md-12">
+                  <div class="block">
+                    <div class="mainimg-upload inlineblock">
+                      <upload-image ng-model="formData.resume" ng-callback="changeit" no-view></upload-image>
+                    </div>
+                    <div class="inlineblock pl10">
+                      <p class="color-white">{{formData.resume}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row pb30">
+                <div class="col-md-12">
+                  <div class="submit-btn float-right">
+                    <a href="" class="submit" ng-class="{'disabled' : !careerForm.$valid }" ng-click="submitCareersForm(careerForm,formData)">Submit</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="submit-over" ng-show="thankyouact">
+        <div class="middle-place">
+          <h2>Thank You!!</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

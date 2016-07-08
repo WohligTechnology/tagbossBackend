@@ -1,0 +1,17 @@
+<ul class="list-unstyled navigation">
+  <li ng-repeat="menu in navigation" class="{{menu.classis}}">
+    <a ui-sref="{{menu.anchor}}" ng-if="menu.anchor">{{menu.name}}</a>
+    <a href="{{menu.link}}" ng-if="menu.link">{{menu.name}}</a>
+    <ul class="dropdown-menu" ng-if="menu.subnav!='';">
+      <li ng-repeat="submenu in menu.subnav">
+        <a ui-serf="{{submenu.anchor}}" ng-if="submenu.anchor">{{submenu.name}}</a>
+        <a herf="{{submenu.link}}" ng-if="submenu.link">{{submenu.name}}</a>
+      </li>
+    </ul>
+  </li>
+  <ul class="list-inline social-down">
+    <li class="social fb"><a href="https://www.facebook.com/innergizesolutions/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+    <!-- <li class="social tw"><a href="" target="_blank"><i class="fa fa-twitter"></i></a></li> -->
+    <li class="social lk"><a href="https://www.linkedin.com/company/7592638?trk=tyah&trkInfo=clickedVertical%3Acompany%2CclickedEntityId%3A7592638%2Cidx%3A2-1-2%2CtarId%3A1456906850012%2Ctas%3AInnergize" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+  </ul>
+</ul>

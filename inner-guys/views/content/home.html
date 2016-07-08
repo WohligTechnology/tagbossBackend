@@ -1,0 +1,18 @@
+<flex-slider flex-slide="s in mySlides track by $index" prev-text="" next-text="">
+<li>
+    <div class="image-holder">
+        <!-- <img ng-src="{{s.image}}"> -->
+        <div class="page-auto" ng-style="{'background-image': 'url('+s.image+')', 'height': autoHeight+'px'}"></div>
+        <div class="dark-overlay"></div>
+        <div class="content-holder">
+            <div class="container">
+              <h3 class="text-uppercase">{{s.title}}</h3>
+              <p ng-bind-html="s.text"></p>
+              <a ui-sref="{{s.pagelink}}" class="btn btn-clear text-uppercase">{{s.pagename}}
+                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+        </div>
+    </div>
+</li>
+</flex-slider>
