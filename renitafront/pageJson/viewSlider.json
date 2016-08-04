@@ -1,0 +1,37 @@
+{
+    "title": "All Slider",
+    "desciption": "",
+    "pageType": "view",
+    "fields": [{
+            "name": "Image",
+            "type":"image",
+            "isSort": "",
+            "tableRef": "image"
+        }],
+    "action": [{
+        "name": "edit",
+        "icon": "mode_edit",
+        "color": "blue",
+        "action": "redirect",
+        "jsonPage": "editSlider",
+        "fieldsToSend": ["_id"],
+        "callFindOne": "homeslider/getone"
+    }, {
+        "name": "delete",
+        "icon": "delete",
+        "color": "red",
+        "action": "apiCallConfirm",
+        "title": "Delete User",
+        "content": "Are you sure you want to delete Slider?",
+        "api": "homeslider/delete",
+        "fieldsToSend": [{
+            "name": "_id",
+            "value": "_id"
+        }]
+    }],
+    "apiCall": {
+        "url": "homeslider/findLimited",
+        "params": ""
+    },
+    "createButtonState": "page({jsonName:'createSlider'})"
+}
