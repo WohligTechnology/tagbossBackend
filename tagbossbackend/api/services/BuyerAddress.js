@@ -9,76 +9,48 @@ var mongoose = require('mongoose'),
   validators = require('mongoose-validators');
 var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
-var sellerSchema = new Schema({
+var buyerAddressSchema = new Schema({
+  // buyerId: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'buyer',
+  //   index: true,
+  //   required: true
+  // },
 
-  firstName: {
-    type: String,
-    trim: true,
-    index: true,
-    required: true,
-    validate: validators.isAlpha()
+  billingAddress:{
+    type:String
   },
-  lastName: {
-    type: String,
-    trim: true,
-    index: true,
-    required: true,
-    validate: validators.isAlpha()
-  },
-  firmName: {
-    type: String,
-    trim: true,
-    index: true,
-    required: true,
-    validate: validators.isAlpha()
-  },
-  email: {
-    type: String,
-    unique: true,
-    index: true,
-    required: true,
-    validate: validators.isEmail()
-  },
-  mobile: {
-    type: String,
-    unique: true,
-    index: true,
-    required: true,
-    validate: validators.isNumeric()
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  isActiveUser: {
-    type: Boolean,
-    default: false
-  }
+  diliveryAddress: [{
+    type: String
+  }]
 });
-sellerSchema.plugin(uniqueValidator);
-module.exports = mongoose.model('seller', sellerSchema);
+buyerAddressSchema.plugin(uniqueValidator);
+module.exports = mongoose.model('buyerAddress', buyerAddressSchema);
 
 var models = {
   saveData: function(data, callback) {
-    var seller = this(data);
-    if (data.email) {
-      this.findOneAndUpdate({
-        email: data.email
-      }, data).exec(function(err, updated) {
-        console.log("HI");
+    var buyerAddress = this(data);
+    if (data._id) {
+      this.update({
+        "_id":data._id,"buyerId": data.buyerId
+      }, {
+        $push: {
+         "buyerAddress": data.buyerAddress
+        }
+      },
+       function(err, updated) {
+        console.log(updated);
         if (err) {
           console.log(err);
           callback(err, null);
-        } else if (updated) {
-          console.log("updated");
-          callback(null, updated);
         } else {
-          callback("Invalid data found!", false);
+          callback(null, updated);
         }
-      });
+      }
+    );
     } else {
       console.log(data);
-      seller.save(function(err, created) {
+      buyerAddress.save(function(err, created) {
         if (err) {
           callback(err, null);
         } else if (created) {
@@ -91,11 +63,9 @@ var models = {
     }
   },
 
-
-
   deleteData: function(data, callback) {
     this.findOneAndRemove({
-      email: data.email
+      "email": data.email
     }, function(err, deleted) {
       if (err) {
         console.log("error");
@@ -109,7 +79,7 @@ var models = {
   },
 
   getAllData: function(data, callback) {
-    this.find({}).exec(function(err, found) {
+    this.find({}).populate("buyer", "email").exec(function(err, found) {
       if (err) {
         console.log(err);
         callback(err, null);
@@ -126,7 +96,7 @@ var models = {
     this.findOne({
       "email": data.email,
       "password": data.password
-    }).exec(function(err, found) {
+    }).populate("buyer", "email").exec(function(err, found) {
       if (err) {
         console.log(err);
         callback(err, null);
@@ -137,11 +107,10 @@ var models = {
       }
     });
   },
-
   getOneData: function(data, callback) {
     this.findOne({
       "_id": data._id
-    }).exec(function(err, found) {
+    }).populate("buyer", "email").exec(function(err, found) {
       if (err) {
         console.log(err);
         callback(err, null);
@@ -152,6 +121,7 @@ var models = {
       }
     });
   }
+
 };
 
 module.exports = _.assign(module.exports, models);

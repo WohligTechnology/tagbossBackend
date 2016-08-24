@@ -1,5 +1,5 @@
 /**
- * sellerController
+ * SellerController
  *
  * @description :: Server-side logic for managing employees
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
@@ -9,7 +9,7 @@ module.exports = {
   save: function(req, res) {
     if (req.body) {
       console.log(req.body);
-      seller.saveData(req.body, function(err, data) {
+      Seller.saveData(req.body, function(err, data) {
         if (err) {
           res.json({
             error: err,
@@ -33,7 +33,7 @@ module.exports = {
   delete: function(req, res) {
     if (req.body) {
       if (req.body.email) {
-        seller.deleteData(req.body, function(err, data) {
+        Seller.deleteData(req.body, function(err, data) {
           if (err) {
             res.json({
               error: err,
@@ -62,7 +62,7 @@ module.exports = {
 
   getAll: function(req, res) {
     if (req.body) {
-      seller.getAllData(req.body, function(err, data) {
+      Seller.getAllData(req.body, function(err, data) {
         if (err) {
           res.json({
             error: err,
@@ -86,7 +86,7 @@ module.exports = {
   login: function(req, res) {
     if (req.body) {
       if (req.body.email && req.body.password) {
-        seller.userLogin(req.body, function(err, data) {
+        Seller.userLogin(req.body, function(err, data) {
           if (err) {
             res.json({
               error: err,
@@ -115,7 +115,7 @@ module.exports = {
   getOne: function(req, res) {
     if (req.body) {
       if (req.body._id) {
-        seller.getOneData(req.body, function(err, data) {
+        Seller.getOneData(req.body, function(err, data) {
           if (err) {
             res.json({
               error: err,
@@ -140,6 +140,38 @@ module.exports = {
         data: "Invalid Request!!!"
       });
     }
+  },
+
+  updateViews : function (req,res) {
+    if(req.body) {
+        if(req.body._id) {
+          Seller.updateReviews(req.body,function(err, data) {
+         if (err) {
+           res.json({
+             error: err,
+             value: false
+           });
+         } else {
+           res.json({
+             data: data,
+             value: true
+           });
+         }
+       });
+     }
+      else{
+        res.json({
+          value : false,
+          data : "No Id Found!!!",
+        });
+      }
+    } else {
+      res.json({
+        value : false,
+        data : "Invalid Request!!!"
+      });
+    }
   }
+
 
 };

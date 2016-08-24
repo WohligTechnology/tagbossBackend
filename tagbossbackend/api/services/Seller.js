@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
   validators = require('mongoose-validators');
 var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
-var buyerSchema = new Schema({
+var SellerSchema = new Schema({
 
   firstName: {
     type: String,
@@ -41,10 +41,11 @@ var buyerSchema = new Schema({
   },
   mobile: {
     type: String,
-    unique:true,
+    unique: true,
     index: true,
     required: true,
-    validate: validators.isNumeric()
+    validate: validators.isNumeric(),
+    validate: validators.isLength(10,10)
   },
   password: {
     type: String,
@@ -53,18 +54,38 @@ var buyerSchema = new Schema({
   isActiveUser: {
     type: Boolean,
     default: false
-  }
+  },
+  review:  [
+    {
+      buyerId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Buyer'
+    },
+      starRating : {
+        type: Number
+      },
+      comment: {
+        type: String
+      },
+      timeStamp:{
+        type:Date,
+        default:Date.now
+      }
+    }
+  ]
+
 });
-buyerSchema.plugin(uniqueValidator);
-module.exports = mongoose.model('buyer', buyerSchema);
+SellerSchema.plugin(uniqueValidator);
+module.exports = mongoose.model('Seller', SellerSchema);
 
 var models = {
   saveData: function(data, callback) {
-    var buyer = this(data);
-    if (data.email) {
+    var Seller = this(data);
+    if (data._id) {
       this.findOneAndUpdate({
-        email: data.email
-      }, data).exec(function(err, updated) {
+        "_id":data._id
+
+      }, data).populate("Buyer","firmName").exec(function(err, updated) {
         console.log("HI");
         if (err) {
           console.log(err);
@@ -78,7 +99,7 @@ var models = {
       });
     } else {
       console.log(data);
-      buyer.save(function(err, created) {
+      Seller.save(function(err, created) {
         if (err) {
           callback(err, null);
         } else if (created) {
@@ -93,9 +114,32 @@ var models = {
 
 
 
+  updateReviews: function(data, callback) {
+console.log("in",data);
+
+    if (data._id) {
+      this.update({
+        "_id": data._id
+      }, {$push: {"review": data.review}},
+       function(err, updated) {
+        console.log(updated);
+        if (err) {
+          console.log(err);
+          callback(err, null);
+        } else {
+          callback(null, updated);
+        }
+      }
+
+      );
+    }else{
+console.log("Enter ID");
+    }
+  },
+
   deleteData: function(data, callback) {
     this.findOneAndRemove({
-      "email": data.email
+      email: data.email
     }, function(err, deleted) {
       if (err) {
         console.log("error");
@@ -137,6 +181,7 @@ var models = {
       }
     });
   },
+
   getOneData: function(data, callback) {
     this.findOne({
       "_id": data._id
@@ -151,7 +196,6 @@ var models = {
       }
     });
   }
-
 };
 
 module.exports = _.assign(module.exports, models);
